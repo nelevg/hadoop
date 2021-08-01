@@ -1,0 +1,19 @@
+---
+- name: Install Nginx
+  yum:
+   name=nginx
+   state=latest
+  notify:
+   - nginx systemd
+- name: Replace nginx.conf
+  template:
+   src: templates/nginx.conf
+   dest: /etc/nginx/nginx.conf
+- name: Create conf dir
+  file: path=/etc/nginx/conf.d/ state=directory
+- name: Copy virt conf
+  template:
+   src: templates/nginx_vhosts.conf
+   dest: /etc/nginx/conf.d/redirect.conf
+  notify:
+   - nginx restart

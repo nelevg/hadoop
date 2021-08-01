@@ -1,0 +1,16 @@
+---
+- hosts: proxy
+  vars:
+   virtual_domain: hadoop
+   virtual_location: NameNodeUI
+   namenode: master
+  become:
+    true
+  become_method:
+    sudo
+  become_user:
+    root
+  remote_user:
+    hadoopuser
+  roles:
+   - nginx
