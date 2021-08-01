@@ -1,0 +1,14 @@
+- hosts: proxy
+  vars:
+	nginx_user: nginx
+	virtual_domain: hadoop
+  become:
+    true
+  become_method:
+    su
+  become_user:
+    root
+  remote_user:
+    hadoopuser
+  roles:
+   - nginx
